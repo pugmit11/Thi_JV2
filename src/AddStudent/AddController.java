@@ -3,6 +3,9 @@ package AddStudent;
 import Entities.Student;
 import Entities.Student;
 import static RootStage.RootStage.rootStage;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,6 +20,7 @@ public class AddController {
     public TextField txPhone;
 
     public static Student addStudent;
+    public static ObservableList<Student> listStudent  = FXCollections.observableArrayList();
 
     public void add(ActionEvent actionEvent) {
         try {
@@ -25,13 +29,14 @@ public class AddController {
             String address = txAddress.getText();
             Integer phone = Integer.parseInt(txPhone.getText());
             Student st = new Student(id,name,address,phone);
+            listStudent.add(st);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
     }
 
     public void back(ActionEvent actionEvent) throws Exception {
-        Parent backHome = FXMLLoader.load(getClass().getResource("../home.fxml"));
+        Parent backHome = FXMLLoader.load(getClass().getResource("../Student.fxml"));
         rootStage.setTitle("Back");
         rootStage.setScene(new Scene(backHome,800,600));
     }
